@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+:root {
+  --sunflower-yellow: #FFD700;
+  --sunflower-brown: #8B4513;
+  --sunflower-green: #228B22;
+  --sunflower-orange: #FFA500;
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-gradient-to-b from-yellow-50 to-orange-50 min-h-screen;
+  }
+}
+
+@layer components {
+  .sunflower-button {
+    @apply bg-[var(--sunflower-yellow)] text-[var(--sunflower-brown)] 
+           px-6 py-3 rounded-full font-semibold 
+           hover:bg-[var(--sunflower-orange)] transition-all duration-300
+           shadow-lg hover:shadow-xl transform hover:-translate-y-1
+           hover:scale-105 active:scale-95;
+  }
+
+  .sunflower-card {
+    @apply bg-white/90 backdrop-blur-sm rounded-2xl p-6 
+           shadow-lg hover:shadow-xl transition-all duration-300
+           border border-yellow-100 relative overflow-hidden;
+  }
+
+  .sunflower-title {
+    @apply text-4xl md:text-5xl font-bold text-[var(--sunflower-brown)]
+           bg-gradient-to-r from-[var(--sunflower-yellow)] to-[var(--sunflower-orange)]
+           bg-clip-text text-transparent;
+  }
+
+  .sunflower-text {
+    @apply text-[var(--sunflower-brown)] leading-relaxed;
+  }
+}
+
+/* Enhanced Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); }
+  50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.4); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Glassmorphism Effects */
+.glass-effect {
+  @apply bg-white/20 backdrop-blur-md border border-white/30;
+}
+
+/* Hover Effects */
+.hover-lift {
+  @apply transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg;
+}
+
+/* Shimmer Effect */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
